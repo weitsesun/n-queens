@@ -138,6 +138,21 @@
       var len = this.get('n');
       // // var row = majorDiagonalColumnIndexAtFirstRow;
       var col = majorDiagonalColumnIndexAtFirstRow;
+      // // // console.log(this.attributes[0])
+      // // while(row-- >0){
+      // //   if(this.attributes[row][col]){
+      // //     console.log(this.attributes[row][col])
+      // //     return true;
+      // //   }
+      // // }
+      // // // for(var col = 0; col < len; col++){
+      // // //   if(row>=0){
+      // // //     console.log(row, col)
+      // // //     console.log(this.attributes[row][col]);
+      // // //   }
+      // // // }
+      // // return false;
+
 
       // //wayne's code below:
       var sum = 0;
@@ -174,12 +189,29 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var len = this.get('n');
+      var col = minorDiagonalColumnIndexAtFirstRow;
+      var sum = 0;
+      for(var row = 0; row < len; row++){
+        if(col >= 0 && col < len){
+          sum += this.rows()[row][col];
+          col--;
+        }else{
+          col--;
+        }
+      }
+      return (sum > 1) ? true : false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var len = this.get('n');
+      for (let col = 0; col < len*2-1; col++) {
+        if(this.hasMinorDiagonalConflictAt(col)){
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
