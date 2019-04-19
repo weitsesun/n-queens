@@ -79,12 +79,12 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      var arr = this.get(rowIndex); // get row#i
-      var conflx = arr.filter(function(element){
-        return element === 1;
-      });
-      return (conflx.length > 1) ? true : false;
-
+      var len = this.get('n');
+      var sum = 0;
+      for (let i = 0; i < len; i++) {
+        sum += this.get(rowIndex)[i];
+      }
+      return sum > 1 ? true : false;
       
     },
 
